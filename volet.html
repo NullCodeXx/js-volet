@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Volet deroulant</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0 auto;
+        }
+        /*BUTTON START */
+        
+        .divbutton {
+            display: flex;
+            justify-content: space-around;
+            flex-direction: row;
+            align-items: center;
+        }
+        
+        .button {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #000;
+            padding: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            width: 8%;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.2s;
+            border: none;
+        }
+        
+        .button:hover {
+            background-color: rgba(100, 100, 100, 0.6);
+            color: #fff;
+            padding: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+        /*BUTTON END*/
+        /*VOLET DEROULANT START*/
+        
+        .main {
+            height: 100%;
+            width: 0%;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: #3C3C3C;
+            color: #fff;
+            transition: 0.5s;
+        }
+        
+        .insidemain {
+            font-family: 'Roboto', sans-serif;
+            transition: 0.3s;
+            opacity: 0;
+        }
+        
+        .scrollmain {
+            /*overflow: auto;*/
+            padding-right: 5%;
+            padding-left: 5%;
+        }
+        
+        .scrollmain:vertical {
+            display: none;
+        }
+        /*VOLET DEROULANT END*/
+    </style>
+</head>
+
+<body>
+    <h1>Volet deroulant</h1>
+    <div class="divbutton">
+        <button class="button">C'est partis</button>
+    </div>
+    <section class="main">
+        <h2 class="insidemain">INDEX ALL</h2>
+        <hr class="insidemain" style="width: 80%;">
+        <div class="scrollmain">
+            <ul>
+                <li><a href="#" alt="" title="Project" class="insidemain">Projet 1</a></li>
+                <li><a href="#" alt="" title="Project" class="insidemain">Projet 2</a></li>
+                <li><a href="#" alt="" title="Project" class="insidemain">Projet 3</a></li>
+                <li><a href="#" alt="" title="Project" class="insidemain">Projet 4</a></li>
+                <li><a href="#" alt="" title="Project" class="insidemain">Projet 5</a></li>
+            </ul>
+        </div>
+    </section>
+    <script>
+        window.load = init(); //Declenche les elements une fois que le document est charger.
+
+        function init() {
+            //Servira pour la condition, lorsque je click 1 fois.
+            let click = 1;
+            //Cible le button. // Ajoute moi les évenements sur ce button.
+            let button = document.querySelector(".button").addEventListener("click", function() {
+                //Cible la section menu.
+                let main = document.body.querySelector(".main");
+                //Cible tout les elements à l'interieur du menus.
+                let inside = document.querySelectorAll(".insidemain");
+                //Cible le volet deroulant a l'interieur du menus.
+                let scrollMain = document.querySelector(".scrollmain");
+                //Ajout de plusieurs click pour la condition.
+                click += 1;
+                //Ajout de la condition.
+                if (click % 2 === 0) {
+                    main.style.width = "30%";
+                    main.style.backgroundColor = "red";
+                    console.log("2");
+                    setTimeout(function() {
+                        scrollMain.style.overflow = "auto";
+                    }, 100);
+                    for (let i = 0; i < inside.length; i++) {
+                        inside[i].style.opacity = "1";
+                    }
+                } else {
+                    main.style.width = "0%";
+                    main.style.backgroundColor = "blue";
+                    scrollMain.style.overflow = "hidden";
+                    for (let i = 0; i < inside.length; i++) {
+                        inside[i].style.opacity = "0";
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
